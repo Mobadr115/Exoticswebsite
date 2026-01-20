@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<link rel="stylesheet" href="signup.css">
+    <!-- Font Import -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+   <header class="header">
+        <div class="container header-content">
+            
+            <div class="logo">
+                   <a href="home.html" class="logo">
+                    <img src="./assets/logo.png" alt="home.html" class="logo-image">
+                </a>
+
+                <div class="logo-text">HEXA XOTICS</div>
+            </div>
+            
+            <div class="header-right-group">
+                <nav class="header-nav-new">
+                
+                    <a href="aboutus.html" class="nav-item active">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        About us
+                    </a>
+                </nav>
+                
+                <a href="#" class="search-icon-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </a>
+
+                <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="mobile-menu-container" id="mobile-menu">
+            
+         
+       
+            <a href="aboutus.html" class="mobile-nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                About us
+            </a>
+        </div>
+    </header>
+
+    
+    <div class="signup-wrapper">
+        <div class="containerr">
+            
+         <div class="form-logo">
+    <img src="./assets/logo.png" alt="Hexa Xotics" style="max-width: 130px;"> 
+   
+</div>
+
+            <h2 class="form-title">Create Your Account</h2>
+
+            <form action="#" method="POST">
+                
+                <div class="input-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+
+            
+                <button class="btn-primary" onclick="window.location.href='home.html'">Create account</button>
+
+            </form>
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+            <div class="social-buttons">
+                <button class="btn-social google">
+                    <i class="fa-brands fa-chrome"></i> Sign Up with Google
+                </button>
+                <button class="btn-social apple">
+                    <i class="fa-brands fa-apple"></i> Sign Up with Apple
+                </button>
+            </div>
+
+            <p class="signin-link">
+                Already have an account? <a href="signin.html">Sign In</a>
+            </p>
+        </div>
+    </div>
+
+
+
+<footer class="footer">
+    <p>&copy; 2025 HEXA XOTICS. All rights reserved.</p>
+
+    <div class="footer-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms-of-service">Terms of Service</a>
+        <a href="contactUS.html">Contact Us</a>
+    </div>
+</footer>
+
+<script>
+    // Select the button and the menu container
+const mobileMenuBtn = document.getElementById('mobile-menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+
+// Add click event to toggle the 'open' class
+mobileMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+});
+</script>
+
+</body>
+</html>

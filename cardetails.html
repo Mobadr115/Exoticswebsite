@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEXA XOTICS - Ferrari 488 GTB</title>
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --color-light-bg: #ffffff;
+            --color-card-bg: #f8f8f8;
+            --color-border: #e0e0e0;
+            
+            /* Accent Color */
+            --color-accent-base: #7b003a; /* Purple-red */
+            --color-accent-hover: #7b003a; 
+            
+            --color-accent: var(--color-accent-base); 
+            --color-text-dark: #1a1a1a; 
+            --color-text-gray: #555555; 
+            --color-text-light-gray: #777777;
+            --max-width: 1280px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-light-bg);
+            color: var(--color-text-dark);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        .header {
+            background-color: rgba(220, 220, 220, 0.7); 
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #cccccc;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 30px; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            height: 100%; 
+            width: auto;
+        }
+
+        .logo-text {
+            font-family: Arial, sans-serif; 
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: #444; 
+            text-transform: uppercase;
+            text-shadow: 
+                0 1px 0 #fff, 
+                0 2px 0 #bbb, 
+                0 3px 0 #aaa, 
+                0 4px 0 #999,
+                0 5px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.1em;
+        }
+
+        .header-right-group {
+            display: flex;
+            align-items: center;
+            gap: 2rem; 
+        }
+
+        .header-nav-new {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem; 
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .header-nav-new .nav-item {
+            color: var(--color-text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0; 
+        }
+
+        .header-nav-new .nav-item:hover,
+        .header-nav-new .nav-item.active {
+            color: var(--color-accent); 
+            background-color: transparent; 
+        }
+        
+        .header-nav-new .nav-item svg {
+            stroke-width: 2;
+        }
+
+        .search-icon-link {
+            color: var(--color-text-dark);
+            text-decoration: none;
+            padding: 0.25rem;
+            transition: color 0.3s;
+        }
+
+        .search-icon-link:hover {
+            color: var(--color-accent); 
+        }
+
+        /* --- PRODUCT STYLES --- */
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        .product-section {
+            padding: 40px 0;
+        }
+
+        .product-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        /* Left Column: Gallery */
+        .gallery-card {
+            background: #fff;
+            padding: 20px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+            opacity: 1;
+        }
+        
+        .main-image.fade-out {
+            opacity: 0.4;
+            filter: blur(2px);
+        }
+
+        .thumbnails {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap; /* Added for responsiveness */
+        }
+
+        .thumb {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 1px solid transparent;
+            opacity: 0.7;
+        }
+        .thumb:hover, .thumb.active {
+            border-color: var(--color-text-dark);
+            opacity: 1;
+        }
+
+        /* Right Column: Details */
+        .details-card {
+            background: #fff;
+            padding: 25px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            height: fit-content;
+        }
+
+        .car-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .car-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--color-accent); 
+            margin-bottom: 25px;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--color-text-gray);
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 25px;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Action Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 10px;
+            border: none;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn-test-drive {
+            background-color: var(--color-accent); 
+            color: white;
+        }
+        .btn-test-drive:hover {
+            background-color: #c67c9f;
+        }
+
+        .btn-buy {
+            background-color: #7b003a;
+            color: white;
+        }
+        .btn-buy:hover {
+            background-color: #c67c9f;
+        }
+
+        .btn-wishlist {
+            background-color: white;
+            border: 1px solid #ccc;
+            color: var(--color-text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-wishlist:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .seller-info {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .seller-title { font-weight: bold; margin-bottom: 5px; font-size: 1rem; }
+        .seller-detail { font-size: 0.85rem; color: var(--color-text-light-gray); line-height: 1.4; }
+
+        /* Related Exotics Section */
+        .related-section {
+            padding: 20px 0 60px 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--color-text-dark);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 15px;
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 2px;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .card-price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-accent); 
+            margin-bottom: 10px;
+        }
+
+        .card-specs {
+            font-size: 0.75rem;
+            color: var(--color-text-light-gray);
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-outline {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            text-align: center;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--color-text-dark);
+        }
+        .btn-outline:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        /* --- NEW FOOTER CSS --- */
+        .footer {
+            text-align: center;
+            padding: 1.5rem 0;
+            color: var(--color-text-light-gray);
+            border-top: 1px solid var(--color-border);
+            font-size: 0.875rem;
+            background-color: #fff;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center; 
+            gap: 1.5rem; 
+            margin-top: 0.5rem; 
+            font-size: 0.875rem; 
+            font-weight: 500; 
+        }
+
+        .footer-links a {
+            color: var(--color-text-gray); 
+            text-decoration: none;
+            transition: color 0.3s;
+            padding: 0.25rem 0; 
+        }
+
+        .footer-links a:hover,
+        .footer-links a.active {
+            color: var(--color-accent); 
+            background-color: transparent;
+        }
+
+        /* Mobile Menu Button (Hamburger) */
+        .mobile-menu-btn {
+            display: none; 
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text-dark);
+            padding: 0.25rem;
+        }
+
+        /* Mobile Menu Container (The Dropdown) */
+        .mobile-menu-container {
+            display: none; 
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: rgba(245, 245, 245, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #ccc;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+
+        .mobile-menu-container.open {
+            display: block;
+        }
+
+        /* Mobile Nav Links Styling */
+        .mobile-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1.5rem;
+            color: var(--color-text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            border-left: 3px solid transparent;
+        }
+
+        .mobile-nav-item:hover {
+            background-color: rgba(0,0,0,0.05);
+            color: var(--color-accent);
+            border-left-color: var(--color-accent);
+        }
+
+        /* --- RESPONSIVE MEDIA QUERY --- */
+        @media (max-width: 992px) {
+            .product-layout { grid-template-columns: 1fr; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .header-nav-new {
+                display: none; 
+            }
+            .mobile-menu-btn {
+                display: block; 
+            }
+            .header-right-group {
+                gap: 1rem;
+            }
+            .products-grid { grid-template-columns: 1fr; }
+            .footer-links { flex-direction: column; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+
+            <div class="logo">
+                <a href="index.html" class="logo">
+                    <img src="./assets/logo.png" alt="home.html" class="logo-image">
+                </a>
+                <div class="logo-text">HEXA XOTICS</div>
+            </div>
+
+            <div class="header-right-group">
+                <nav class="header-nav-new">
+                    <a href="index.html" class="nav-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                        Shop
+                    </a>
+                    <a href="payment.html" class="nav-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        Buy
+                    </a>
+                    <a href="acountmangment.html" class="nav-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        Account
+                    </a>
+                    <a href="aboutus.html" class="nav-item active">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        About us
+                    </a>
+                </nav>
+
+                <a href="#" class="search-icon-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </a>
+
+                <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="mobile-menu-container" id="mobile-menu">
+            <a href="index.html" class="mobile-nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+                Shop
+            </a>
+            <a href="payment.html" class="mobile-nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                Buy
+            </a>
+            <a href="acountmangment.html" class="mobile-nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                Account
+            </a>
+            <a href="aboutus.html" class="mobile-nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                About us
+            </a>
+        </div>
+    </header>
+
+
+    <main class="container">
+        
+        <section class="product-section">
+            <div class="product-layout">
+                
+                <div class="gallery-card">
+                    <img src="assets/Ferrari-488-GTB.jpg" alt="Ferrari 488 GTB" class="main-image">
+                    
+                    <div class="thumbnails">
+                        <img src="assets/Ferrari-488-GTB(1).jpg" class="thumb">
+                        <img src="assets/Ferrari-488-GTB(2).jpg" class="thumb">   
+                        <img src="assets/Ferrari-488-GTB(3).jpg" class="thumb">
+                        <img src="assets/Ferrari-488-GTB(4).jpg" class="thumb">
+                        <img src="assets/Ferrari-488-GTB(5).jpg" class="thumb">
+                    </div>
+                </div>
+
+                <div class="details-card">
+                    <h1 class="car-title">Ferrari 488 GTB</h1>
+                    <div class="car-price">$ 320,000</div>
+
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span>🏎️</span> Engine: 3.9L Twin-Turbo
+                        </div>
+                        <div class="spec-item">
+                            <span>🐎</span> Horsepower: 661 hp
+                        </div>
+                        <div class="spec-item">
+                            <span>⏱️</span> 0-60 MPH: 3.0 sec
+                        </div>
+                        <div class="spec-item">
+                            <span>🚀</span> Top Speed: 205 mph
+                        </div>
+                        <div class="spec-item">
+                            <span>⚙️</span> Transmission: 7-speed
+                        </div>
+                        <div class="spec-item">
+                            <span>🛣️</span> Mileage: 5,200 miles
+                        </div>
+                        <div class="spec-item">
+                            <span>🎨</span> Ext Color: Rosso Corsa
+                        </div>
+                        <div class="spec-item">
+                            <span>💺</span> Int Color: Nero Leather
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn btn-test-drive">Request Test Drive</a>
+                  
+                     <a href="payment.html">
+                        <button class="btn btn-buy">Buy Now</button>
+                     </a>
+                    <button class="btn btn-wishlist">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        Add to Wishlist
+                    </button>
+
+                    <div class="seller-info">
+                        <div class="seller-title">Seller Information</div>
+                        <div class="seller-detail">HEXA XOTICS Dealership</div>
+                        <div class="seller-detail">Beverly Hills, CA</div>
+                        <div class="seller-detail">+1 (555) 123-4567</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="related-section">
+            <h2 class="section-title">Related Exotics</h2>
+            <div class="products-grid">
+                
+                <div class="product-card">
+                    <img src="assets/Lamborghini-Huracan-Evo.jpeg" alt="Lamborghini" class="card-img">
+                    <div class="card-title">Lamborghini Huracán Evo</div>
+                    <div class="card-price">$285,000</div>
+                    <div class="card-specs">HP: 631 | 0-60: 2.9s</div>
+                    <a href="#" class="btn-outline">View Details</a>
+                </div>
+
+                <div class="product-card">
+                    <img src="assets/McLaren-720S.jpg" alt="McLaren 720S" class="card-img">
+                    <div class="card-title">McLaren 720S</div>
+                    <div class="card-price">$310,000</div>
+                    <div class="card-specs">HP: 710 | 0-60: 2.8s</div>
+                    <a href="#" class="btn-outline">View Details</a>
+                </div>
+
+                <div class="product-card">
+                    <img src="assets/Porsche-911-GT3-RS.jpeg" alt="Porsche 911 GT3 RS" class="card-img">
+                    <div class="card-title">Porsche 911 GT3 RS</div>
+                    <div class="card-price">$250,000</div>
+                    <div class="card-specs">HP: 502 | 0-60: 3.0s</div>
+                    <a href="#" class="btn-outline">View Details</a>
+                </div>
+
+                <div class="product-card">
+                    <img src="assets/Audi-R8-V10-Performance.jpeg" alt="Audi R8 V10 Performance" class="card-img">
+                    <div class="card-title">Audi R8 V10 Performance</div>
+                    <div class="card-price">$220,000</div>
+                    <div class="card-specs">HP: 602 | 0-60: 3.2s</div>
+                    <a href="#" class="btn-outline">View Details</a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 HEXA XOTICS. All rights reserved.</p>
+
+        <div class="footer-links">
+            <a href="privacyandPolicy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="contactUS.html">Contact Us</a>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Add click event to toggle the 'open' class
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+            });
+        }
+
+        const mainImage = document.querySelector('.main-image');
+        const thumbnails = document.querySelectorAll('.thumb');
+        
+        // Ensure mainImage exists before accessing properties
+        if (mainImage) {
+            const originalImageSrc = mainImage.src;
+
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    mainImage.classList.add('fade-out');
+                    setTimeout(() => {
+                        mainImage.src = this.src;
+                        mainImage.classList.remove('fade-out');
+                    }, 300);
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            mainImage.addEventListener('click', function() {
+                if (mainImage.src === originalImageSrc) return;
+
+                mainImage.classList.add('fade-out');
+                setTimeout(() => {
+                    mainImage.src = originalImageSrc;
+                    mainImage.classList.remove('fade-out');
+                }, 300);
+
+                thumbnails.forEach(t => t.classList.remove('active'));
+            });
+        }
+
+        const buyBtn = document.querySelector('.btn-buy');
+        const testDriveBtn = document.querySelector('.btn-test-drive');
+        const wishlistBtn = document.querySelector('.btn-wishlist');
+
+        // Fixed: Removed the stray "e.preventDefault();" causing the bug.
+
+        if (testDriveBtn) {
+            testDriveBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert("Test drive requested! (Demo)");
+            });
+        }
+
+        if (wishlistBtn) {
+            wishlistBtn.addEventListener('click', function() {
+                this.style.backgroundColor = "#ffe6e6";
+                this.style.color = "#d80000";
+                this.style.borderColor = "#d80000";
+                // Optional: Change text or icon
+            });
+        }
+    </script>
+</body>
+</html>

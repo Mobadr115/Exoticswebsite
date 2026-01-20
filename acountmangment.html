@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account Management - HEXA XOTICS</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Global Reset & Fonts --- */
+        :root {
+            --primary-color: #950045;       /* لون البراند */
+            --primary-hover: #7b003a;
+            --bg-color: #f3f4f6;            /* خلفية الصفحة */
+            --card-bg: #ffffff;
+            --text-dark: #171a1f;
+            --text-gray: #9095a0;
+            --border-color: #dee2e6;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-dark); }
+
+        /* --- Layout Utility --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+
+        /* --- Header --- */
+        .header { background: white; border-bottom: 1px solid var(--border-color); padding: 15px 0; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 1.2rem; text-transform: uppercase; }
+        .logo-image { height: 40px; }
+        .logo-text { color: #333; letter-spacing: 1px; }
+
+        .header-nav { display: flex; gap: 25px; }
+        .nav-item { text-decoration: none; color: #555; font-weight: 500; transition: color 0.3s; }
+        .nav-item:hover, .nav-item.active { color: var(--primary-color); }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; }
+
+        /* --- Page Layout --- */
+        .page-layout { display: flex; gap: 30px; margin-top: 30px; margin-bottom: 50px; align-items: flex-start; }
+
+        /* --- Sidebar Styling --- */
+        .sidebar { width: 300px; flex-shrink: 0; }
+
+        .sidebar-tab {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-box {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .sidebar-box h3 { font-size: 16px; margin-bottom: 8px; color: var(--text-dark); }
+        .box-desc { font-size: 13px; color: var(--text-gray); margin-bottom: 15px; line-height: 1.4; }
+
+        .action-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .action-btn:hover { background-color: var(--primary-hover); }
+
+        /* Accordion in Sidebar */
+        .accordion-header { display: flex; justify-content: space-between; cursor: pointer; align-items: center; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .accordion-content.open { max-height: 500px; padding-top: 15px; }
+
+        .warning-block { border: 1px solid #e0e0e0; border-radius: 6px; padding: 10px; margin-bottom: 10px; background: #fff; }
+        .warning-header { display: flex; align-items: center; gap: 8px; color: var(--primary-color); font-size: 14px; margin-bottom: 4px; }
+        .warning-block p { font-size: 12px; color: var(--text-gray); margin: 0; }
+
+        /* --- Main Content Styling --- */
+        .main-content { flex-grow: 1; }
+        .page-title { font-size: 24px; margin-bottom: 20px; font-weight: 700; }
+
+        .profile-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        .card-header h2 { font-size: 20px; margin-bottom: 5px; }
+        .card-header p { color: var(--text-gray); font-size: 14px; margin-bottom: 30px; }
+
+        /* Avatar */
+        .avatar-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; }
+        .avatar-wrapper img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #f0f0f0; }
+        .change-avatar-btn {
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .change-avatar-btn:hover { background: #333; }
+
+        /* Form */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 8px; color: #333; }
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            color: #333;
+            outline: none;
+        }
+        .form-input:focus { border-color: var(--primary-color); }
+        .form-input[readonly] { background-color: #f9f9f9; color: #777; }
+
+        .form-actions { display: flex; justify-content: flex-end; gap: 15px; margin-top: 30px; }
+        .btn { padding: 10px 24px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+        .btn-cancel { background: white; border: 1px solid var(--border-color); color: #333; }
+        .btn-cancel:hover { background: #f5f5f5; }
+        .btn-save { background: var(--primary-color); color: white; }
+        .btn-save:hover { background: var(--primary-hover); }
+
+        /* --- Footer --- */
+        .footer { text-align: center; padding: 30px 0; color: var(--text-gray); border-top: 1px solid var(--border-color); margin-top: auto; font-size: 14px; background: white; }
+        .footer-links { margin-top: 10px; display: flex; justify-content: center; gap: 20px; }
+        .footer-links a { color: var(--text-gray); text-decoration: none; }
+        .footer-links a:hover { color: var(--primary-color); }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .page-layout { flex-direction: column; }
+            .sidebar { width: 100%; }
+            .header-nav { display: none; flex-direction: column; position: absolute; top: 70px; right: 0; background: white; width: 200px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid #ddd; }
+            .mobile-menu-btn { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <a href="home.html">
+                    <img src="./assets/logo.png" alt="HEXA XOTICS" class="logo-image" onerror="this.style.display='none'">
+                </a>
+                <div class="logo-text">HEXA XOTICS</div>
+            </div>
+
+            <div class="header-right-group">
+                <nav class="header-nav">
+                    <a href="home.html" class="nav-item">Shop</a>
+                    <a href="payment.html" class="nav-item">Buy</a>
+                    <a href="acountmangment.html" class="nav-item active">Account</a>
+                    <a href="aboutus.html" class="nav-item">About us</a>
+                </nav>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container page-layout">
+        
+        <aside class="sidebar">
+            <div class="sidebar-tab active-tab">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                Profile
+            </div>
+
+            <div class="sidebar-box">
+                <h3>My Shopping</h3>
+                <p class="box-desc">Access your saved luxury items.</p>
+                <button class="action-btn" onclick="window.location.href='wishlist.html'">My Wishlist</button>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="accordion-header" onclick="toggleActions()">
+                    <h3>Account Actions</h3>
+                    <span id="arrow-icon">▼</span>
+                </div>
+                
+                <div class="accordion-content" id="actions-content">
+                    <p class="box-desc">Manage critical actions (Logout, Delete).</p>
+
+                    <div class="warning-block">
+                        <div class="warning-header">
+                            <span class="warning-icon">⚠️</span>
+                            <strong>Log out</strong>
+                        </div>
+                        <p>You will need to log back in.</p>
+                    </div>
+                    <button class="action-btn logout-btn" onclick="window.location.href='signin.html'">Log out</button>
+
+                    <div class="warning-block">
+                        <div class="warning-header">
+                            <span class="warning-icon">⚠️</span>
+                            <strong>Delete Account</strong>
+                        </div>
+                        <p>Permanently delete your account.</p>
+                    </div>
+                    <button class="action-btn delete-btn" onclick="window.location.href='signup.html'">Delete Account</button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <h1 class="page-title">Account Management</h1>
+
+            <div class="profile-card">
+                <div class="card-header">
+                    <h2>Profile Information</h2>
+                    <p>Update your personal details and communication preferences.</p>
+                </div>
+
+                <div class="avatar-section">
+                    <div class="avatar-wrapper">
+                        <img src="./assets/profile-photo.jpg" alt="Profile" id="avatar-img" onerror="this.src='https://via.placeholder.com/100'">
+                    </div>
+                    <button class="change-avatar-btn">Change Avatar</button>
+                </div>
+
+                <form class="profile-form" onsubmit="event.preventDefault();">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" value="Mohammed Wael (Badr)" class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" value="badr@hexaxotics.com" class="form-input" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" value="+20 100 123 4567" class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preferred Communication</label>
+                        <select class="form-input">
+                            <option value="email">Email</option>
+                            <option value="phone">Phone Calls</option>
+                            <option value="whatsapp">WhatsApp</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-cancel">Cancel</button>
+                        <button class="btn btn-save">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 HEXA XOTICS. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="privacyandpolicy.html">Privacy Policy</a>
+                <a href="Terms.html">Terms of Service</a>
+                <a href="contactUS.html">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleActions() {
+            const content = document.getElementById('actions-content');
+            const arrow = document.getElementById('arrow-icon');
+            content.classList.toggle('open');
+            arrow.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        function toggleMobileMenu() {
+            const nav = document.querySelector('.header-nav');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>
